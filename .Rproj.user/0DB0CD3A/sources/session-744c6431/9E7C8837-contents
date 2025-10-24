@@ -1,8 +1,7 @@
 #' Visualise mean arrival delays by airport
 #'
 #' This function summarises flight arrival delays by destination airport
-#' using `nycflights13::flights`, joins it with airport coordinates from
-#' `nycflights13::airports`, and returns a scatter plot of airports
+#' and returns a scatter plot of airports
 #' positioned by longitude/latitude and coloured by mean delay.
 #'
 #' @return A `ggplot2` plot object.
@@ -12,7 +11,7 @@
 #' Packages used:
 #' - dplyr (for data manipulation)
 #' - ggplot2 (for plotting)
-#' - nycflights13 (for the `flights` and `airports` datasets)
+#' - nycflights13 (for the datasets)
 #'
 #' @examples
 #' \dontrun{
@@ -22,7 +21,6 @@
 #' @export
 visualize_airport_delays <- function() {
 
-  # summarise mean arrival delay per destination airport
   delay_data <- nycflights13::flights |>
     dplyr::group_by(dest) |>
     dplyr::summarise(
@@ -35,7 +33,6 @@ visualize_airport_delays <- function() {
     ) |>
     dplyr::select(dest, mean_delay, lat, lon)
 
-  # build the plot
   ggplot2::ggplot(
     delay_data,
     ggplot2::aes(x = lon, y = lat, colour = mean_delay)

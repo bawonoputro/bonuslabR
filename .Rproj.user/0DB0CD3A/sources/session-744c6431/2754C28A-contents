@@ -13,40 +13,56 @@
 #' predict(model, iris)
 #' coef(model)
 ridgereg <- function(formula, data, lambda = 1) {
-  mf <- model.frame(formula, data)
-  y <- model.response(mf)
-  tf <- terms(formula, data = data)
-  X <- model.matrix(tf, data = mf)
 
-  # Remove intercept column for regularization
+  mf <- model.frame(formula, data)
+  y  <- model.response(mf)
+  tf <- terms(formula, data = data)
+  X  <- model.matrix(tf, data = mf)
+
   X_no_intercept <- X[, -1, drop = FALSE]
 
-  # Normalize predictors (center and scale)
-  X_scaled <- scale(X_no_intercept)
-  y_center <- y - mean(y)
 
-  # Ridge regression coefficients
+  x_means <- colMeans(X_no_intercept)
+  x_sds   <- apply(X_no_intercept, 2, sd)
+  x_sds[x_sds == 0] <- 1
+
+  X_scaled <- scale(
+    X_no_intercept,
+    center = x_means,
+    scale  = x_sds
+  )
+
+  y_mean   <- mean(y)
+  y_center <- y - y_mean
+
+
   XtX <- t(X_scaled) %*% X_scaled
-  beta <- solve(XtX + lambda * diag(ncol(X_scaled))) %*% t(X_scaled) %*% y_center
+  Xty <- t(X_scaled) %*% y_center
 
-  # Intercept
-  intercept <- mean(y) - colMeans(X_no_intercept) %*% beta
-  coefficients <- c(intercept, beta)
+  p <- ncol(X_scaled)
+  beta_scaled <- solve(XtX + lambda * diag(p), Xty)
 
-  # Naming
-  coef_names <- colnames(X)
-  names(coefficients) <- coef_names
+  beta_unscaled <- as.vector(beta_scaled / x_sds)
+  names(beta_unscaled) <- colnames(X_no_intercept)
 
-  # Fitted values
-  fitted <- X %*% coefficients
+  intercept <- y_mean - sum(beta_unscaled * x_means)
 
-  structure(list(
-    coefficients = coefficients,
-    fitted.values = fitted,
-    formula = formula,
-    terms = tf,
-    lambda = lambda,
-    X = X_scaled,
-    y = y
-  ), class = "ridgereg")
+  coefficients <- c(`(Intercept)` = intercept, beta_unscaled)
+
+  fitted_vals <- X %*% coefficients
+
+  structure(
+    list(
+      coefficients   = coefficients,
+      fitted.values  = fitted_vals,
+      formula        = formula,
+      terms          = tf,
+      lambda         = lambda,
+      x_means        = x_means,
+      x_sds          = x_sds,
+      y_mean         = y_mean
+    ),
+    class = "ridgereg"
+  )
 }
+

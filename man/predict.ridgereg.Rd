@@ -20,8 +20,3 @@ A numeric vector of predictions.
 \description{
 Generate predictions from a fitted \code{ridgereg} model.
 }
-\details{
-If \code{newdata} is not provided, this returns the fitted values on the
-training data. If \code{newdata} is provided, it builds a model matrix
-using the original formula and returns predictions for the new rows.
-}

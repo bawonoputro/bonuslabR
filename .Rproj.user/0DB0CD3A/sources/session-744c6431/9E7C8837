@@ -3,7 +3,7 @@
     "path": "~/Documents/LiU/Advanced Programming R/Bonus Lab/regbonuslab/R/airport_delay.R",
     "project_path": "R/airport_delay.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "583520363",
     "contents": "",
     "dirty": false,
     "created": 1761297784278.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "8,23",
-        "scrollLine": "0"
+        "cursorPosition": "34,0",
+        "scrollLine": "27"
     },
     "folds": "",
-    "lastKnownWriteTime": 1761302622,
+    "lastKnownWriteTime": 1761313457,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1761302622106,
+    "last_content_update": 1761313457527,
     "read_only": false,
     "read_only_alternatives": []
 }

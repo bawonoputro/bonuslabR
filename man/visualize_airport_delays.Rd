@@ -11,15 +11,14 @@ A `ggplot2` plot object.
 }
 \description{
 This function summarises flight arrival delays by destination airport
-using `nycflights13::flights`, joins it with airport coordinates from
-`nycflights13::airports`, and returns a scatter plot of airports
+and returns a scatter plot of airports
 positioned by longitude/latitude and coloured by mean delay.
 }
 \details{
 Packages used:
 - dplyr (for data manipulation)
 - ggplot2 (for plotting)
-- nycflights13 (for the `flights` and `airports` datasets)
+- nycflights13 (for the datasets)
 }
 \examples{
 \dontrun{

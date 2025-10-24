@@ -1,21 +1,23 @@
 Package: regression
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Ridge Regression
 Version: 0.1.0
 Authors@R: c(
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
+      "Paripurna", "Bawonoputro",
+      email = "parba751@student.liu.se",
       role = c("aut", "cre")
     )
   )
-Description: More about what it does (maybe more than one line).
+Description: Standard Ridge Regression and QR Ridge Regression.
     Continuation lines should be indented.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests: 
+    knitr,
     MASS,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 RoxygenNote: 7.3.3
@@ -26,3 +28,4 @@ Imports:
     stats
 URL: https://github.com/bawonoputro/bonuslabR
 BugReports: https://github.com/bawonoputro/bonuslabR/issues
+VignetteBuilder: knitr

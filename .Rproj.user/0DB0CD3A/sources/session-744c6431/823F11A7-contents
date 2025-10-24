@@ -15,14 +15,11 @@
 #'
 #' @export
 predict.ridgereg_qr <- function(object, newdata = NULL, ...) {
-  # If no new data provided, just return fitted values from training set
   if (is.null(newdata)) {
     return(object$fitted.values)
   }
 
-  # Build design matrix for new data using the original model formula
   X_new <- stats::model.matrix(object$formula, newdata)
 
-  # Linear predictor: X_new %*% beta
   as.vector(X_new %*% object$coefficients)
 }

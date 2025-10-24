@@ -2,9 +2,6 @@
 #'
 #' Generate predictions from a fitted \code{ridgereg} model.
 #'
-#' If \code{newdata} is not provided, this returns the fitted values on the
-#' training data. If \code{newdata} is provided, it builds a model matrix
-#' using the original formula and returns predictions for the new rows.
 #'
 #' @param object A \code{ridgereg} model object returned by \code{ridgereg()}.
 #' @param newdata Optional data frame with new predictor values. If omitted,
@@ -15,15 +12,11 @@
 #'
 #' @export
 predict.ridgereg <- function(object, newdata = NULL, ...) {
-  # Case 1: no new data → just return fitted values already stored in the model
   if (is.null(newdata)) {
     return(object$fitted.values)
   }
 
-  # Case 2: predict on new data
-  # build new design matrix using the original formula
   X_new <- stats::model.matrix(object$formula, newdata)
 
-  # linear predictor: X_new %*% beta
   as.vector(X_new %*% object$coefficients)
 }
