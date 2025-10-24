@@ -21,6 +21,7 @@ RoxygenNote: 7.3.3
 Imports: 
     MASS,
     dplyr,
-    ggplot2
+    ggplot2,
+    magrittr
 URL: https://github.com/sreyasas95/regression
 BugReports: https://github.com/sreyasas95/regression/issues
