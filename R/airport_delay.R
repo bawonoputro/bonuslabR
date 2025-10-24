@@ -1,31 +1,50 @@
-#' Visualize Airport Delays
+#' Visualise mean arrival delays by airport
 #'
-#' Creates a plot of mean arrival delays by airport using dplyr and ggplot2.
-#' @return A ggplot object
+#' This function summarises flight arrival delays by destination airport
+#' using `nycflights13::flights`, joins it with airport coordinates from
+#' `nycflights13::airports`, and returns a scatter plot of airports
+#' positioned by longitude/latitude and coloured by mean delay.
+#'
+#' @return A `ggplot2` plot object.
+#'
+#' @details
+#' Packages used:
+#' - dplyr (for data manipulation)
+#' - ggplot2 (for plotting)
+#' - nycflights13 (for the `flights` and `airports` datasets)
+#'
+#' @examples
+#' \dontrun{
+#'   visualize_airport_delays()
+#' }
+#'
 #' @export
-#' @importFrom dplyr group_by summarise left_join select
-#' @importFrom ggplot2 ggplot geom_point aes labs theme_minimal
-#' @import nycflights13
 visualize_airport_delays <- function() {
-  library(dplyr)
-  library(ggplot2)
-  library(nycflights13)
 
-  # Calculate mean delay per destination
-  delay_data <- flights %>%
-    dplyr::group_by(dest) %>%
-    dplyr::summarise(mean_delay = mean(arr_delay, na.rm = TRUE)) %>%
-    dplyr::left_join(airports, by = c("dest" = "faa")) %>%
-    select(dest, mean_delay, lat, lon)
+  # summarise mean arrival delay per destination airport
+  delay_data <- nycflights13::flights |>
+    dplyr::group_by(dest) |>
+    dplyr::summarise(
+      mean_delay = mean(arr_delay, na.rm = TRUE),
+      .groups = "drop"
+    ) |>
+    dplyr::left_join(
+      nycflights13::airports,
+      by = c("dest" = "faa")
+    ) |>
+    dplyr::select(dest, mean_delay, lat, lon)
 
-  # Plot
-  ggplot(delay_data, aes(x = lon, y = lat, color = mean_delay)) +
-    geom_point(size = 3, alpha = 0.7) +
-    labs(
+  # build the plot
+  ggplot2::ggplot(
+    delay_data,
+    ggplot2::aes(x = lon, y = lat, colour = mean_delay)
+  ) +
+    ggplot2::geom_point(size = 3, alpha = 0.7) +
+    ggplot2::labs(
       title = "Mean Arrival Delay by Airport",
       x = "Longitude",
       y = "Latitude",
-      color = "Mean Delay (min)"
+      colour = "Mean Delay (min)"
     ) +
-    theme_minimal()
+    ggplot2::theme_minimal()
 }
