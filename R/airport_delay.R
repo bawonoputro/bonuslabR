@@ -13,9 +13,9 @@ visualize_airport_delays <- function() {
 
   # Calculate mean delay per destination
   delay_data <- flights %>%
-    group_by(dest) %>%
-    summarise(mean_delay = mean(arr_delay, na.rm = TRUE)) %>%
-    left_join(airports, by = c("dest" = "faa")) %>%
+    dplyr::group_by(dest) %>%
+    dplyr::summarise(mean_delay = mean(arr_delay, na.rm = TRUE)) %>%
+    dplyr::left_join(airports, by = c("dest" = "faa")) %>%
     select(dest, mean_delay, lat, lon)
 
   # Plot
