@@ -137,6 +137,7 @@ ridge_test_rmse
 # =====================================================
 # QR-based ridge
 ```{r}
+
 kfold_ridge_cv_qr <- function(formula, data, lambdas, k = 10){
   set.seed(123)
   folds <- caret::createFolds(
@@ -162,17 +163,14 @@ kfold_ridge_cv_qr <- function(formula, data, lambdas, k = 10){
       train_fold <- data[train_idx, , drop = FALSE]
       valid_fold <- data[valid_idx, , drop = FALSE]
 
-      
       ridge_fit_qr <- ridgereg_qr(
         formula = formula,
         data    = train_fold,
         lambda  = lam
       )
 
-      
       pred_valid_qr <- predict(ridge_fit_qr, newdata = valid_fold)
 
-     d
       rmse_fold[fi] <- rmse(valid_fold$Petal.Length, pred_valid_qr)
     }
 
@@ -183,38 +181,54 @@ kfold_ridge_cv_qr <- function(formula, data, lambdas, k = 10){
 }
 
 
-cv_results_qr <- kfold_ridge_cv_qr(
-  formula  = full_formula,
-  data     = iris_train,
-  lambdas  = lambda_grid,
-  k        = 10
-)
+qr_demo_result <- tryCatch({
 
-cv_results_qr
+  cv_results_qr <- kfold_ridge_cv_qr(
+    formula  = full_formula,
+    data     = iris_train,
+    lambdas  = lambda_grid,
+    k        = 10
+  )
 
-best_row_qr    <- cv_results_qr[ which.min(cv_results_qr$mean_rmse), ]
-best_lambda_qr <- best_row_qr$lambda
+  cv_results_qr
 
-best_lambda_qr
-best_row_qr
+  best_row_qr    <- cv_results_qr[ which.min(cv_results_qr$mean_rmse), ]
+  best_lambda_qr <- best_row_qr$lambda
 
-ridge_best_qr <- ridgereg_qr(
-  formula = full_formula,
-  data    = iris_train,
-  lambda  = best_lambda_qr
-)
+  best_lambda_qr
+  best_row_qr
 
-print(ridge_best_qr)
-coef(ridge_best_qr)
+  # fit final QR-based ridge on all training data
+  ridge_best_qr <- ridgereg_qr(
+    formula = full_formula,
+    data    = iris_train,
+    lambda  = best_lambda_qr
+  )
 
-ridge_train_pred_qr <- predict(ridge_best_qr, newdata = iris_train)
-ridge_test_pred_qr  <- predict(ridge_best_qr, newdata = iris_test)
+  print(ridge_best_qr)
+  coef(ridge_best_qr)
 
-ridge_train_rmse_qr <- rmse(iris_train$Petal.Length, ridge_train_pred_qr)
-ridge_test_rmse_qr  <- rmse(iris_test$Petal.Length,  ridge_test_pred_qr)
+  # evaluate QR-based ridge on train and test
+  ridge_train_pred_qr <- predict(ridge_best_qr, newdata = iris_train)
+  ridge_test_pred_qr  <- predict(ridge_best_qr, newdata = iris_test)
 
-ridge_train_rmse_qr
-ridge_test_rmse_qr
+  ridge_train_rmse_qr <- rmse(iris_train$Petal.Length, ridge_train_pred_qr)
+  ridge_test_rmse_qr  <- rmse(iris_test$Petal.Length,  ridge_test_pred_qr)
+
+  ridge_train_rmse_qr
+  ridge_test_rmse_qr
+
+  list(
+    best_lambda_qr     = best_lambda_qr,
+    ridge_train_rmse_qr = ridge_train_rmse_qr,
+    ridge_test_rmse_qr  = ridge_test_rmse_qr
+  )
+
+}, error = function(e) {
+  message("Skipping QR ridge demo in vignette due to error: ", e$message)
+  NULL
+})
+
 
 ```
 # =====================================================
@@ -266,29 +280,36 @@ plot_obj + ggtitle("Mean Arrival Delay by Airport (custom title)")
 # Caret function
 ```{r}
 
-set.seed(123)
+if (requireNamespace("caret", quietly = TRUE)) {
 
-ctrl <- caret::trainControl(
-  method = "cv",    
-  number = 10       
-)
+  set.seed(123)
 
-caret_model <- caret::train(
-  form = full_formula,
-  data = iris_train,
-  method = "lm",     
-  trControl = ctrl
-)
+  ctrl <- caret::trainControl(
+    method = "cv",    
+    number = 10      
+  )
 
-caret_model
+  caret_model <- caret::train(
+    form = full_formula,
+    data = iris_train,
+    method = "lm",       
+    trControl = ctrl
+  )
 
-caret_model$results
+  caret_model
 
-caret_train_pred <- predict(caret_model, newdata = iris_train)
-caret_test_pred  <- predict(caret_model, newdata = iris_test)
+  caret_model$results
 
-caret_train_rmse <- rmse(iris_train$Petal.Length, caret_train_pred)
-caret_test_rmse  <- rmse(iris_test$Petal.Length,  caret_test_pred)
 
-caret_train_rmse
-caret_test_rmse
+  caret_train_pred <- predict(caret_model, newdata = iris_train)
+  caret_test_pred  <- predict(caret_model, newdata = iris_test)
+
+  caret_train_rmse <- rmse(iris_train$Petal.Length, caret_train_pred)
+  caret_test_rmse  <- rmse(iris_test$Petal.Length,  caret_test_pred)
+
+  caret_train_rmse
+  caret_test_rmse
+
+} else {
+  message("Package 'caret' not installed; skipping caret::train() demo.")
+}
