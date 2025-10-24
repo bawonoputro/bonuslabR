@@ -6,6 +6,7 @@
 #' positioned by longitude/latitude and coloured by mean delay.
 #'
 #' @return A `ggplot2` plot object.
+#' @import nycflights13
 #'
 #' @details
 #' Packages used:

@@ -22,7 +22,7 @@ RoxygenNote: 7.3.3
 Imports: 
     dplyr,
     ggplot2,
-    magrittr,
+    nycflights13,
     stats
-URL: https://github.com/sreyasas95/regression
-BugReports: https://github.com/sreyasas95/regression/issues
+URL: https://github.com/bawonoputro/bonuslabR
+BugReports: https://github.com/bawonoputro/bonuslabR/issues
