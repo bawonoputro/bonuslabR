@@ -1,24 +1,26 @@
 {
-    "id": "796057CA",
+    "id": "115DBA35",
     "path": "~/Documents/LiU/Advanced Programming R/Bonus Lab/regbonuslab/R/print.ridgereg_qr.R",
     "project_path": "R/print.ridgereg_qr.R",
     "type": "r_source",
     "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1761295601022.0,
+    "created": 1761298901662.0,
     "source_on_save": false,
-    "relative_order": 10,
+    "relative_order": 11,
     "properties": {
         "source_window_id": "",
-        "Source": "Source"
+        "Source": "Source",
+        "cursorPosition": "23,0",
+        "scrollLine": "2"
     },
     "folds": "",
-    "lastKnownWriteTime": 1761207721,
+    "lastKnownWriteTime": 1761298942,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1761207721,
+    "last_content_update": 1761298942216,
     "read_only": false,
     "read_only_alternatives": []
 }

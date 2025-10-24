@@ -1,26 +1,26 @@
 {
-    "id": "706915AC",
+    "id": "9E7C8837",
     "path": "~/Documents/LiU/Advanced Programming R/Bonus Lab/regbonuslab/R/airport_delay.R",
     "project_path": "R/airport_delay.R",
     "type": "r_source",
     "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1761291473822.0,
+    "created": 1761297784278.0,
     "source_on_save": false,
-    "relative_order": 5,
+    "relative_order": 8,
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "50,0",
-        "scrollLine": "29"
+        "cursorPosition": "16,12",
+        "scrollLine": "0"
     },
     "folds": "",
     "lastKnownWriteTime": 1761295562,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1761295562845,
+    "last_content_update": 1761295562,
     "read_only": false,
     "read_only_alternatives": []
 }

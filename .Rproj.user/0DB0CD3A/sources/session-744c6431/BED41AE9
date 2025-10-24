@@ -1,26 +1,26 @@
 {
-    "id": "148700E9",
+    "id": "BED41AE9",
     "path": "~/Documents/LiU/Advanced Programming R/Bonus Lab/regbonuslab/NAMESPACE",
     "project_path": "NAMESPACE",
     "type": "r_namespace",
-    "hash": "3489729777",
+    "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1761293246306.0,
+    "created": 1761297510044.0,
     "source_on_save": false,
-    "relative_order": 8,
+    "relative_order": 5,
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "3,67",
+        "cursorPosition": "15,0",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1761293280,
+    "lastKnownWriteTime": 1761297506,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1761293280891,
+    "last_content_update": 1761297506,
     "read_only": false,
     "read_only_alternatives": []
 }

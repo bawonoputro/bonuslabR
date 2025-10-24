@@ -1,24 +1,26 @@
 {
-    "id": "ECA1E78E",
+    "id": "823F11A7",
     "path": "~/Documents/LiU/Advanced Programming R/Bonus Lab/regbonuslab/R/predict.ridgereg_qr.R",
     "project_path": "R/predict.ridgereg_qr.R",
     "type": "r_source",
     "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1761291223806.0,
+    "created": 1761298809730.0,
     "source_on_save": false,
-    "relative_order": 3,
+    "relative_order": 10,
     "properties": {
         "source_window_id": "",
-        "Source": "Source"
+        "Source": "Source",
+        "cursorPosition": "28,0",
+        "scrollLine": "7"
     },
     "folds": "",
-    "lastKnownWriteTime": 1761213183,
+    "lastKnownWriteTime": 1761298892,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1761213183,
+    "last_content_update": 1761298892940,
     "read_only": false,
     "read_only_alternatives": []
 }
