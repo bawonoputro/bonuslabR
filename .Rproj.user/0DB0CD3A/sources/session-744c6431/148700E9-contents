@@ -1,4 +1,0 @@
-exportPattern("^[[:alpha:]]+")
-importFrom(magrittr, "%>%")
-importFrom("stats", "model.frame", "model.matrix", "model.response", "terms")
-importFrom(stats, model.frame, model.matrix, model.response, terms)
